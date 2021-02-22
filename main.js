@@ -40,6 +40,8 @@ async function infer_options(options) {
 //     writeFileSync("gui.js", code, "utf-8");
 // })();
 
+// ====================================================
+
 // (async function () {
 
 //     let src = `
@@ -67,7 +69,7 @@ async function infer_options(options) {
 //         let {
 //             code
 //         } = await minify(src, {
-//             shuffle_mangle: "ydzm" + i,
+//             shuffle_mangle: `ydzm${i}`,
             
 //             mangle: true,
 //             keep_classnames: false,
