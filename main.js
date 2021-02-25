@@ -1,16 +1,28 @@
 import "./lib/transform.js";
 import "./lib/mozilla-ast.js";
-import { minify } from "./lib/minify.js";
+import {
+    minify
+} from "./lib/minify.js";
 
-export { minify } from "./lib/minify.js";
-export { run_cli as _run_cli } from "./lib/cli.js";
+export {
+    minify
+}
+from "./lib/minify.js";
+export {
+    run_cli as _run_cli
+}
+from "./lib/cli.js";
 
 export async function _default_options() {
     const defs = {};
 
-    Object.keys(infer_options({ 0: 0 })).forEach((component) => {
+    Object.keys(infer_options({
+        0: 0
+    })).forEach((component) => {
         const options = infer_options({
-            [component]: {0: 0}
+            [component]: {
+                0: 0
+            }
         });
 
         if (options) defs[component] = options;
@@ -54,6 +66,19 @@ async function infer_options(options) {
 //             let ccc = 15;
 //             let bbb = 17;
 
+//             if (bbb === 35) {
+//                 let ddd = 3;
+//                 for (let i = 0; i < 100; ++i) {
+//                     console.log("aaaa");
+//                 }
+
+//                 let eee = 35;
+
+//                 {
+//                     let fff = 1000;
+//                 }
+//             }
+
 //             console.log("aaa = " + aaa);
 //         }
 
@@ -65,23 +90,26 @@ async function infer_options(options) {
 
 //     let r = new Set();
 
-//     for (let i = 0; i < 10; ++i) {
+//     for (let i = 0; i < 3; ++i) {
 //         let {
 //             code
 //         } = await minify(src, {
 //             shuffle_mangle: `ydzm${i}`,
-            
+//             deadcode_inject: {
+//                 ratio: 0.2,
+//                 random_seed: `ydzm${i}`,
+//             },
 //             mangle: true,
 //             keep_classnames: false,
 //             compress: false,
 //         });
-        
+
 //         r.add(code);
 //     }
 
 //     for (let c of r) {
 //         console.log(c);
-//         // break;
+//         // break;   
 //     }
 
 //     console.log(r.size);
