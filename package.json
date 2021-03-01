@@ -13,7 +13,6 @@
   ],
   "repository": "https://github.com/terser/terser",
   "main": "dist/bundle.min.js",
-  "type": "module",
   "module": "./main.js",
   "exports": {
     ".": [
