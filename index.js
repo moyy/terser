@@ -1,5 +1,4 @@
 const walk = require("walkdir");
-
 const {
     minify
 } = require("terser");
@@ -13,21 +12,33 @@ const {
 
 const { relative, dirname } = require("path");
 
+// import * as walk from "walkdir";
+// import {minify} from "terser";
+// import { readFileSync, writeFileSync, mkdirSync, accessSync } from "fs";
+// import { relative, dirname } from "path";
+
 let srcNames = [];
 
-walk.sync("./src", (path, stat) => {    
+walk.sync("./minigame_release", (path, stat) => {    
     if (stat.isDirectory()) {
         return;
     }
-
-    if (!path.endsWith(".js")) {
-        return;
-    }
-
+    
     path = relative(".", path);
-    console.log("path = " + path);
+    
+    if (path.endsWith(".js")) {
+        console.log("path = " + path);
+        srcNames.push(path);
+    } else {
+        
+        let dstPath = path.replace(/^minigame_release/, "minigame_release_mangle");
+        console.log("dstPath = " + dstPath);
 
-    srcNames.push(path);
+        mkdirSync(dirname(dstPath), {"recursive": true});
+        
+        let code = readFileSync(path, "utf8");
+        writeFileSync(dstPath, code, "utf-8");
+    }
 });
 
 console.log("==========================");
@@ -40,14 +51,14 @@ console.log("==========================");
         let {
             code
         } = await minify(src, {
-            shuffle_mangle: "ydzm",
+            shuffle_mangle: "golf",
         
             mangle: true,
             keep_classnames: false,
             compress: false,
         });
         
-        let dstPath = path.replace(/^src/, "dst");
+        let dstPath = path.replace(/^minigame_release/, "minigame_release_mangle");
         console.log("dstPath = " + dstPath);
         mkdirSync(dirname(dstPath), {"recursive": true});
         
